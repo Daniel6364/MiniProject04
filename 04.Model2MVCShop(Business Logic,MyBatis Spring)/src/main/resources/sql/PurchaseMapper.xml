@@ -59,6 +59,7 @@
 		WHERE tran_no = #{tranNo}
 	</update>
  	
+ 
 	<sql id="select-purchaseList">
 		SELECT  
 		t.tran_no, t.prod_no, t.buyer_id, t.payment_option, t.receiver_name,  
@@ -66,18 +67,21 @@
 		t.order_date, t.dlvy_date  
 		FROM transaction t  
 		LEFT JOIN product p ON t.prod_no = p.prod_no  
-		WHERE t.buyer_id = #{buyer.userId} 
+		WHERE t.buyer_id = #{buyerId} 
 	</sql>
 
-	<select id="getPurchaseList" parameterType=map resultMap="purchaseSelectMap">
+
+	<select id="getPurchaseList" parameterType="map" resultMap="purchaseSelectMap">
 		SELECT *
 		FROM ( SELECT inner_table.* , ROWNUM AS row_seq
 		FROM ( 
-	<include refid="select-purchaseList" />
+
+		<include refid="select-purchaseList" />
+ 
 		ORDER BY t.tran_no ) inner_table
-		WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND
-		#{endRowNum}
+		WHERE ROWNUM &lt;= #{search.endRowNum} )
+		WHERE row_seq BETWEEN #{search.startRowNum} AND
+		#{search.endRowNum}
 	</select>
 	
 	<update id="updateTranCode" parameterType="purchase">
@@ -91,19 +95,8 @@
 	<!-- SQL : SELECT ROW Count -->
 	<select id="getTotalCount" parameterType="search" resultType="int">
 		SELECT COUNT(*)
-		FROM( SELECT prod_no , prod_name , price
-		FROM users
-		<if test="searchCondition != null">
-			<where>
-				<if test="searchCondition == 0 and searchKeyword !='' ">
-					prod_no = #{searchKeyword}
-				</if>
-				<if test="searchCondition == 1 and searchKeyword !='' ">
-					prod_name = #{searchKeyword}
-				</if>
-			</where>
-		</if>
+		FROM( SELECT tran_no
+		FROM transaction		
 		) countTable
 	</select>
-
 </mapper>
