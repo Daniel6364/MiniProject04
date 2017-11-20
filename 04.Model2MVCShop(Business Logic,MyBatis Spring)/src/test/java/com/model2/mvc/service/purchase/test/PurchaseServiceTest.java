@@ -186,7 +186,8 @@ public class PurchaseServiceTest {
 	 	
 	 	purchase.setBuyer(userService.getUser("user10"));
 	 	String buyerId = purchase.getBuyer().getUserId();
-	 	Map<String, Object> map = purchaseService.getPurchaseList(search, buyerId);
+//	 	Map<String, Object> map = purchaseService.getPurchaseList(search, buyerId);
+	 	Map<String, Object> map = purchaseService.getPurchaseList(map);
 	 	
 	 	List<Object> list = (List<Object>)map.get("pList");
 	 	Assert.assertEquals(3, list.size());
@@ -203,7 +204,8 @@ public class PurchaseServiceTest {
 	 	search.setPageSize(3);
 	 	search.setSearchCondition("0");
 	 	search.setSearchKeyword("");
-	 	map = purchaseService.getPurchaseList(search, buyerId);
+//	 	map = purchaseService.getPurchaseList(search, buyerId);
+	 	map = purchaseService.getPurchaseList(map);
 	 	
 	 	list = (List<Object>)map.get("pList");
 	 	Assert.assertEquals(3, list.size());

@@ -69,7 +69,7 @@
 		WHERE t.buyer_id = #{buyer.userId} 
 	</sql>
 
-	<select id="getPurchaseList" parameterType="map" resultMap="purchaseSelectMap">
+	<select id="getPurchaseList" parameterType=map resultMap="purchaseSelectMap">
 		SELECT *
 		FROM ( SELECT inner_table.* , ROWNUM AS row_seq
 		FROM ( 
