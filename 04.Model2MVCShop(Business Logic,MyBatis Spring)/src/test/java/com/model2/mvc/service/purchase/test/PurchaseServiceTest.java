@@ -177,42 +177,41 @@ public class PurchaseServiceTest {
 	 }
 	 
 	 @Test
-	 public void testGetPurchaseListAll() throws Exception{
-		 
-	 	Search search = new Search();
-	 	search.setCurrentPage(1);
-	 	search.setPageSize(3);
-	 	Purchase purchase = new Purchase();
-	 	
-	 	purchase.setBuyer(userService.getUser("user10"));
-	 	String buyerId = purchase.getBuyer().getUserId();
-	 	Map<String, Object> map = purchaseService.getPurchaseList(search, buyerId);
-	 	
-	 	List<Object> list = (List<Object>)map.get("pList");
-	 	Assert.assertEquals(3, list.size());
-	 	
-		//==> console 확인
-	 	System.out.println(list);
-	 	
-	 	Integer totalCount = (Integer)map.get("totalCount");
-	 	System.out.println(totalCount);
-	 	
-	 	System.out.println("=======================================");
-	 	
-	 	search.setCurrentPage(1);
-	 	search.setPageSize(3);
-	 	search.setSearchCondition("0");
-	 	search.setSearchKeyword("");
-	 	map = purchaseService.getPurchaseList(search, buyerId);
-	 	
-	 	list = (List<Object>)map.get("pList");
-	 	Assert.assertEquals(3, list.size());
-	 	
-	 	//==> console 확인
-	 	//System.out.println(list);
-	 	
-	 	totalCount = (Integer)map.get("totalCount");
-	 	System.out.println(totalCount);
-	 }
+	public void testGetPurchaseListAll() throws Exception {
+
+		Search search = new Search();
+		search.setCurrentPage(1);
+		search.setPageSize(3);
+		Purchase purchase = new Purchase();
+
+		purchase.setBuyer(userService.getUser("user10"));
+		String buyerId = purchase.getBuyer().getUserId();
+
+		Map<String, Object> map = purchaseService.getPurchaseList(search, buyerId);
+
+		List<Object> list = (List<Object>) map.get("list");
+		Assert.assertEquals(3, list.size());
+
+		// ==> console 확인
+		System.out.println(list);
+
+		Integer totalCount = (Integer) map.get("totalCount");
+		System.out.println(totalCount);
+
+		System.out.println("=======================================");
+
+		search.setCurrentPage(1);
+		search.setPageSize(3);
+		map = purchaseService.getPurchaseList(search, buyerId);
+
+		list = (List<Object>) map.get("list");
+		Assert.assertEquals(3, list.size());
+
+		// ==> console 확인
+		// System.out.println(list);
+
+		totalCount = (Integer) map.get("totalCount");
+		System.out.println(totalCount);
+	}
 	 
 }

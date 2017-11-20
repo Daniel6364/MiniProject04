@@ -1,5 +1,6 @@
 package com.model2.mvc.service.purchase;
 
+import java.util.List;
 import java.util.Map;
 
 import com.model2.mvc.common.Search;
@@ -18,7 +19,7 @@ public interface PurchaseDao {
 	public Purchase getPurchase2(int prodNo) throws Exception ;
 
 	// SELECT LIST
-	public Map<String, Object> getPurchaseList(Search search, String buyerId) throws Exception ;
+	public List<Purchase> getPurchaseList(Map<String, Object> map) throws Exception ;
 
 	// UPDATE
 	public void updatePurchase(Purchase purchase) throws Exception ;

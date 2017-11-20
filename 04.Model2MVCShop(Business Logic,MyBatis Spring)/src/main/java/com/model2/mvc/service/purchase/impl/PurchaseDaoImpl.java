@@ -1,5 +1,7 @@
 package com.model2.mvc.service.purchase.impl;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -43,8 +45,8 @@ public class PurchaseDaoImpl implements PurchaseDao {
 	}
 
 	@Override
-	public Map<String, Object> getPurchaseList(Search search, String buyerId) throws Exception {
-		return sqlSession.selectMap("PurchaseMapper.getPurchaseList", search, buyerId);
+	public List<Purchase> getPurchaseList(Map<String, Object> map) throws Exception {
+		return sqlSession.selectList("PurchaseMapper.getPurchaseList", map);
 	}
 
 	@Override
